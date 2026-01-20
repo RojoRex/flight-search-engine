@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { searchLocations } from '../services/amadeus';
 import '../styles/Autocomplete.css';
 
-export default function AutocompleteInput({ label, value, onChange, placeholder }) {
+export default function AutocompleteInput({ label, value, onChange, placeholder, inputRef, onSelectionComplete, defaultOptions = [] }) {
     const [query, setQuery] = useState(value);
     const [suggestions, setSuggestions] = useState([]);
     const [showSuggestions, setShowSuggestions] = useState(false);
@@ -12,15 +12,22 @@ export default function AutocompleteInput({ label, value, onChange, placeholder 
     useEffect(() => {
         const timer = setTimeout(async () => {
             if (query.length >= 2 && showSuggestions) {
-                const results = await searchLocations(query);
-                setSuggestions(results);
+                try {
+                    const results = await searchLocations(query);
+                    setSuggestions(results);
+                } catch (error) {
+                    console.error("Search failed", error);
+                    setSuggestions([]);
+                }
+            } else if (showSuggestions && query.length === 0) {
+                 setSuggestions(defaultOptions);
             } else {
                 setSuggestions([]);
             }
         }, 400);
 
         return () => clearTimeout(timer);
-    }, [query, showSuggestions]);
+    }, [query, showSuggestions, defaultOptions]);
 
     // Click outside to close
     useEffect(() => {
@@ -37,6 +44,9 @@ export default function AutocompleteInput({ label, value, onChange, placeholder 
         setQuery(`${item.cityName} (${item.iataCode})`);
         onChange(item.iataCode); // Pass back only the IATA code to parent
         setShowSuggestions(false);
+        if (onSelectionComplete) {
+            onSelectionComplete();
+        }
     };
 
     const handleChange = (e) => {
@@ -46,16 +56,24 @@ export default function AutocompleteInput({ label, value, onChange, placeholder 
         if (e.target.value === '') onChange('');
     };
 
+    const handleFocus = () => {
+        setShowSuggestions(true);
+        if (query.length === 0 && defaultOptions.length > 0) {
+            setSuggestions(defaultOptions);
+        }
+    };
+
     return (
         <div className="form-group" ref={wrapperRef}>
             <label className="form-label">{label}</label>
             <div className="autocomplete-wrapper">
                 <input
+                    ref={inputRef}
                     type="text"
                     className="form-input"
                     value={query} // show friendly name
                     onChange={handleChange}
-                    onFocus={() => setShowSuggestions(true)}
+                    onFocus={handleFocus}
                     placeholder={placeholder}
                 />
 

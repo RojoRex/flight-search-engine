@@ -1,7 +1,7 @@
 // This service is integrated with Amadeus Self-Service API
 // Documentation: https://developers.amadeus.com/self-service/category/air/api-doc/flight-offers-search
 
-const AMADEUS_BASE_URL = 'https://test.api.amadeus.com/v2';
+const AMADEUS_BASE_URL = '/amadeus/v2';
 const CLIENT_ID = import.meta.env.VITE_AMADEUS_CLIENT_ID;
 const CLIENT_SECRET = import.meta.env.VITE_AMADEUS_CLIENT_SECRET;
 
@@ -17,7 +17,7 @@ const getAccessToken = async () => {
         throw new Error("Missing Amadeus API Keys. Please check your .env file.");
     }
 
-    const response = await fetch('https://test.api.amadeus.com/v1/security/oauth2/token', {
+    const response = await fetch('/amadeus/v1/security/oauth2/token', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: `grant_type=client_credentials&client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}`
@@ -56,7 +56,7 @@ export const searchFlightsAmadeus = async ({ origin, destination, date }) => {
         const token = await getAccessToken();
 
         // Format: date must be YYYY-MM-DD
-        const url = `${AMADEUS_BASE_URL}/shopping/flight-offers?originLocationCode=${origin}&destinationLocationCode=${destination}&departureDate=${date}&adults=1&nonStop=false&max=25`;
+        const url = `/amadeus/v2/shopping/flight-offers?originLocationCode=${origin}&destinationLocationCode=${destination}&departureDate=${date}&adults=1&nonStop=false&max=25`;
 
         const response = await fetch(url, {
             headers: {
@@ -137,7 +137,7 @@ export const searchLocations = async (keyword) => {
 
     try {
         const token = await getAccessToken();
-        const url = `${AMADEUS_BASE_URL}/reference-data/locations?subType=CITY,AIRPORT&keyword=${keyword}&page[limit]=5`;
+        const url = `/amadeus/v2/reference-data/locations?subType=CITY,AIRPORT&keyword=${keyword}&page[limit]=5`;
 
         const response = await fetch(url, {
             headers: {

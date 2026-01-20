@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import { ResponsiveContainer, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 import { format } from 'date-fns';
+import PriceGraphSkeleton from './PriceGraphSkeleton';
 import '../styles/PriceGraph.css';
 
 const CustomTooltip = ({ active, payload, label }) => {
@@ -18,7 +19,8 @@ const CustomTooltip = ({ active, payload, label }) => {
     return null;
 };
 
-export default function PriceGraph({ flights }) {
+export default function PriceGraph({ flights, loading }) {
+    if (loading) return <PriceGraphSkeleton />;
     if (!flights || flights.length === 0) return null;
 
     // Process data for the line graph: Sort by departure time
