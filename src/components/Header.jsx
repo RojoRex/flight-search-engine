@@ -1,35 +1,35 @@
 import React from 'react';
-import { Plane, Bell, Menu } from 'lucide-react';
+import { Plane, Menu, Grid, Bell, Globe, Hotel, Map, Compass } from 'lucide-react';
 import '../styles/Header.css';
 
 export default function Header() {
     return (
         <header className="header-container">
-            <a href="#" className="logo-wrapper">
-                <div className="logo-icon">
-                    <Plane className="text-white w-6 h-6" fill="currentColor" />
-                </div>
-                <span className="logo-text">
-                    Air<span style={{ color: 'var(--color-primary)' }}>Finder</span>
-                </span>
-            </a>
-
-            <nav className="main-nav">
-                <a href="#" className="nav-link active">Explore</a>
-                <a href="#" className="nav-link">Flights</a>
-                <a href="#" className="nav-link">Hotels</a>
-                <a href="#" className="nav-link">Packages</a>
-            </nav>
-
-            <div className="header-actions">
-                <button className="p-2 text-slate-400 hover:text-white transition-colors">
-                    <Bell size={20} />
-                </button>
-                <button className="btn-secondary hidden sm:block">My Trips</button>
-                <div className="user-avatar" title="User Profile"></div>
-                <button className="md:hidden text-slate-300">
+            <div className="header-left">
+                <button className="menu-trigger" aria-label="Menu">
                     <Menu size={24} />
                 </button>
+                <a href="/" className="logo-link">
+                    <span className="logo-brand">Air<span className="logo-finder">Finder</span></span>
+                </a>
+            </div>
+
+            <nav className="header-center">
+                <a href="#" className="nav-tab"><Compass size={18} /><span>Travel</span></a>
+                <a href="#" className="nav-tab"><Globe size={18} /><span>Explore</span></a>
+                <a href="#" className="nav-tab active"><Plane size={18} /><span>Flights</span></a>
+                <a href="#" className="nav-tab"><Hotel size={18} /><span>Hotels</span></a>
+                <a href="#" className="nav-tab"><Map size={18} /><span>Tracked prices</span></a>
+            </nav>
+
+            <div className="header-right">
+                <button className="icon-btn" title="Notifications">
+                    <Bell size={20} />
+                </button>
+                <button className="icon-btn" title="Apps">
+                    <Grid size={20} />
+                </button>
+                <div className="profile-circle" title="Google Account"></div>
             </div>
         </header>
     );

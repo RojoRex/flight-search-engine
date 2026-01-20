@@ -7,9 +7,9 @@ const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
         const data = payload[0].payload;
         return (
-            <div className="glass-panel p-3 text-xs border border-slate-700 shadow-xl" style={{ backgroundColor: 'rgba(15, 23, 42, 0.95)' }}>
+            <div className="glass-panel p-3 text-xs border border-slate-700 shadow-xl" style={{ backgroundColor: 'rgba(32, 33, 36, 0.95)' }}>
                 <p className="font-bold text-white mb-1">{format(new Date(data.departureTime), 'hh:mm a')}</p>
-                <p className="text-indigo-300 font-bold text-lg">${data.price}</p>
+                <p className="font-bold text-lg" style={{ color: 'var(--color-primary)' }}>${data.price}</p>
                 <p className="text-slate-400 mt-1">{data.airline}</p>
                 <p className="text-slate-500">{Math.floor(data.durationMinutes / 60)}h {data.durationMinutes % 60}m</p>
             </div>
@@ -42,22 +42,22 @@ export default function PriceGraph({ flights }) {
                 >
                     <defs>
                         <linearGradient id="colorPrice" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="5%" stopColor="#6366f1" stopOpacity={0.4} />
-                            <stop offset="95%" stopColor="#6366f1" stopOpacity={0} />
+                            <stop offset="5%" stopColor="var(--color-primary)" stopOpacity={0.4} />
+                            <stop offset="95%" stopColor="var(--color-primary)" stopOpacity={0} />
                         </linearGradient>
                     </defs>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#334155" opacity={0.3} vertical={false} />
+                    <CartesianGrid strokeDasharray="3 3" stroke="#3c4043" opacity={0.3} vertical={false} />
                     <XAxis
                         dataKey="timeLabel"
-                        tick={{ fill: '#94a3b8', fontSize: 11 }}
+                        tick={{ fill: '#9aa0a6', fontSize: 11 }}
                         tickLine={false}
-                        axisLine={{ stroke: '#334155' }}
+                        axisLine={{ stroke: '#3c4043' }}
                         interval="preserveStartEnd"
                     />
                     <YAxis
-                        tick={{ fill: '#94a3b8', fontSize: 11 }}
+                        tick={{ fill: '#9aa0a6', fontSize: 11 }}
                         tickLine={false}
-                        axisLine={{ stroke: '#334155' }}
+                        axisLine={{ stroke: '#3c4043' }}
                         unit="$"
                         width={40}
                     />
@@ -65,7 +65,7 @@ export default function PriceGraph({ flights }) {
                     <Area
                         type="monotone"
                         dataKey="price"
-                        stroke="#6366f1"
+                        stroke="var(--color-primary)"
                         strokeWidth={2}
                         fillOpacity={1}
                         fill="url(#colorPrice)"

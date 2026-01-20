@@ -2,37 +2,39 @@
     display: grid;
     grid-template-columns: 1fr;
     gap: 1rem;
-    padding: 1.5rem;
-    margin-bottom: 1rem;
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.2s, box-shadow 0.2s;
+    padding: 1.25rem;
+    margin-bottom: 0.75rem;
+    background: rgba(32, 33, 36, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    transition: background 0.2s, transform 0.2s;
 }
 
 @media (min-width: 640px) {
     .flight-card {
         grid-template-columns: 80px 1fr 150px;
         align-items: center;
-        padding: 1.25rem 2rem;
+        padding: 1rem 1.5rem;
     }
 }
 
 .flight-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
-    border-color: rgba(99, 102, 241, 0.3);
+    background: rgba(32, 33, 36, 0.6);
+    border-color: var(--color-primary);
+    transform: scale(1.005);
 }
 
 .airline-logo {
-    width: 48px;
-    height: 48px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: 700;
-    color: var(--color-accent);
+    color: var(--color-primary);
+    font-size: 0.8rem;
 }
 
 .flight-info {
@@ -63,13 +65,13 @@
 }
 
 .time {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: white;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--color-text-main);
 }
 
 .airport {
-    font-size: 0.875rem;
+    font-size: 0.8rem;
     color: var(--color-text-muted);
 }
 
@@ -77,28 +79,16 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-width: 120px;
-    position: relative;
+    min-width: 100px;
 }
 
 .duration-line {
-    width: 100%;
-    height: 2px;
+    width: 60px;
+    height: 1px;
     background: var(--color-text-muted);
     opacity: 0.3;
     margin: 4px 0;
     position: relative;
-}
-
-.duration-line::after {
-    content: '';
-    position: absolute;
-    right: 0;
-    top: -2px;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--color-text-muted);
 }
 
 .duration-text {
@@ -118,30 +108,28 @@
     .price-section {
         flex-direction: column;
         justify-content: center;
-        border-left: 1px solid var(--glass-border);
-        padding-left: 2rem;
+        border-left: 1px solid rgba(255, 255, 255, 0.05);
     }
 }
 
 .price {
-    font-size: 1.75rem;
-    font-weight: 700;
-    color: white;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--color-primary);
 }
 
 .select-btn {
     background: transparent;
-    border: 1px solid var(--color-primary);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     color: var(--color-primary);
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
-    font-size: 0.875rem;
-    font-weight: 600;
-    margin-top: 0.5rem;
+    padding: 0.4rem 1rem;
+    border-radius: 100px;
+    font-size: 0.85rem;
+    font-weight: 500;
     transition: all 0.2s;
 }
 
 .select-btn:hover {
-    background: var(--color-primary);
-    color: white;
+    background: rgba(138, 180, 248, 0.1);
+    border-color: var(--color-primary);
 }
