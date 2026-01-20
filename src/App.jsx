@@ -65,28 +65,30 @@ function App() {
   }, [allFlights]);
 
   return (
-    <div className="container app-layout">
+    <div className="app-wrapper">
       <Header />
 
-      <SearchForm onSearch={handleSearch} loading={loading} />
+      <div className="container app-layout">
+        <SearchForm onSearch={handleSearch} loading={loading} />
 
-      {searched && (
-        <div className="main-content">
-          <FilterBar
-            filters={filters}
-            setFilters={setFilters}
-            maxPriceAvailable={Math.ceil(maxPriceAvailable)}
-            airlines={availableAirlines}
-          />
+        {searched && (
+          <div className="main-content">
+            <FilterBar
+              filters={filters}
+              setFilters={setFilters}
+              maxPriceAvailable={Math.ceil(maxPriceAvailable)}
+              airlines={availableAirlines}
+            />
 
-          <div className="results-column">
-            <PriceGraph flights={filteredFlights} />
-            <FlightList flights={filteredFlights} loading={loading} />
+            <div className="results-column">
+              <PriceGraph flights={filteredFlights} />
+              <FlightList flights={filteredFlights} loading={loading} />
+            </div>
           </div>
-        </div>
-      )}
+        )}
 
-      <Footer />
+        <Footer />
+      </div>
     </div>
   );
 }
