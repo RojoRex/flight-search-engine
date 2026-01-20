@@ -81,7 +81,7 @@ function App() {
             />
 
             <div className="results-column">
-              <PriceGraph flights={filteredFlights} />
+              <PriceGraph flights={filteredFlights} loading={loading} />
               <FlightList flights={filteredFlights} loading={loading} />
             </div>
           </div>

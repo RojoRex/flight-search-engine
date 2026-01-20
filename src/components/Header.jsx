@@ -14,13 +14,7 @@ export default function Header() {
                 </a>
             </div>
 
-            <nav className="header-center">
-                <a href="#" className="nav-tab"><Compass size={18} /><span>Travel</span></a>
-                <a href="#" className="nav-tab"><Globe size={18} /><span>Explore</span></a>
-                <a href="#" className="nav-tab active"><Plane size={18} /><span>Flights</span></a>
-                <a href="#" className="nav-tab"><Hotel size={18} /><span>Hotels</span></a>
-                <a href="#" className="nav-tab"><Map size={18} /><span>Tracked prices</span></a>
-            </nav>
+
 
             <div className="header-right">
                 <button className="icon-btn" title="Notifications">
